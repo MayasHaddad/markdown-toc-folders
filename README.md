@@ -20,7 +20,7 @@ Options:
   -h, --help         Show help                                                 [boolean]
 
 Examples:
-  toc . -i foo.md dist/ -o README.md  builds Table of Content recursively for all files 
-                                      in current directory excluding foo.md and dist/* 
-                                      and writes the result to README.md
+  toc . -i foo.md dist/ -o README.md  builds a Table of Content recursively for all
+                                      files in current directory excluding foo.md and 
+                                      dist/* and writes the result to README.md
 ```
