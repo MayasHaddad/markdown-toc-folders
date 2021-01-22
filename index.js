@@ -22,7 +22,7 @@ const args = yargs
   .alias("help", "h")
   .example(
     "$0 . -i foo.md dist/ -o README.md",
-    "builds Table of Content recursively for all files in current directory excluding foo.md and dist/* and writes the result to README.md"
+    "builds a Table of Content recursively for all files in current directory excluding foo.md and dist/* and writes the result to README.md"
   ).argv;
 
 const run = async () => {
@@ -34,13 +34,17 @@ const run = async () => {
     (e) => !ignoredPaths?.find((ignoredPath) => e.startsWith(ignoredPath))
   );
 
-  let totalContent = "";
+  let result = "";
   for (let file of withoutIgnoredPaths) {
     const currentFileContent = await fs.readFile(`./${file}`, "utf-8");
-    totalContent = `${totalContent}\n${currentFileContent}`;
+    const fileResult = toc(currentFileContent).content;
+    result = `${result}\n${fileResult.replaceAll(
+      "(#",
+      `(./${encodeURIComponent(file)}#`
+    )}`;
   }
 
-  const result = toc(totalContent).content;
+  result = `## Table of Content${result}`;
 
   if (!outputFile) {
     console.log(result);
