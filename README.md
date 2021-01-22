@@ -2,6 +2,12 @@
 
 [markdown-toc](https://github.com/jonschlinkert/markdown-toc) recursively usable on a folder.
 
+## Install
+
+```sh
+npm i -g markdown-toc-folders
+```
+
 ## CLI
 
 ```
